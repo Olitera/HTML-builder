@@ -13,6 +13,6 @@ stdin.on('data', all => {
     
 });
 
-process.on('exit', () => stdout.write('Good luck'));
+process.on('exit', () => stdout.write('\nGood luck\n'));
 process.on('SIGINT', () => process.exit());
 
