@@ -1,4 +1,3 @@
-const { error } = require('console');
 const fs = require('fs');
 const path = require('path');
 
@@ -8,8 +7,8 @@ const { stdin, stdout} = process;
 
 stdout.write('Hello, let\'s do it\n');
 stdin.on('data', all => {
-    output.write(all);
-    if (all.toString() === 'exit\n') {process.exit()}
+  output.write(all);
+  if (all.toString() === 'exit\n') {process.exit();}
     
 });
 
