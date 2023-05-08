@@ -64,11 +64,11 @@ fs.readdir(path.join(__dirname, 'styles'), (err, files) => {
 });
 
 function copy() {
-  fsPromises.mkdir(path.join(__dirname, 'project-dist'), { recursive: true })
+  fsPromises.mkdir(path.join(__dirname, 'project-dist', 'assets'), { recursive: true })
     .then(() => fsPromises.readdir(path.join(__dirname, 'assets')))
     .then((filesArray) => {
       for (const file of filesArray) {
-        fsPromises.copyFile(`${path.join(__dirname, 'assets', file)}`, `${path.join(__dirname, 'project-dist', file)}`);
+        fsPromises.copyFile(`${path.join(__dirname, 'assets', file)}`, `${path.join(__dirname, 'project-dist', 'assets', file)}`);
       }
     });
 }
