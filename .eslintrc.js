@@ -8,6 +8,7 @@ module.exports = {
   'parserOptions': {
     'ecmaVersion': 12
   },
+  'ignorePatterns': ['**/script.js'],
   'rules': {
     'indent': [
       'error',
