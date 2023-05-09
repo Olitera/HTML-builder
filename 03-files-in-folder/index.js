@@ -3,7 +3,6 @@ const path = require('path');
 const mainPath = `${__dirname}/secret-folder`;
 
 fs.readdir(mainPath, (err, files) => {
-  // console.log(mainPath);
   if (err) throw err;
   for (let i = 0; i < files.length; i++) {
     fs.stat(mainPath + '/'+ files[i], (err, stats) => {

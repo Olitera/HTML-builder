@@ -7,11 +7,11 @@ let readHtml;
 let writeHTML;
 let htmlCount = 0;
 let sum = 0;
-
 let readStyles;
 let arr = [];
 let count = 0;
-let writeStyles
+let writeStyles;
+
 fs.mkdir(path.join(__dirname, 'project-dist'), { recursive: true }, () => {
   writeStyles = fs.createWriteStream(path.join(__dirname, 'project-dist', 'styles.css'));
 });
@@ -19,7 +19,7 @@ fs.mkdir(path.join(__dirname, 'project-dist'), { recursive: true }, () => {
 readStream = fs.createReadStream(path.join(__dirname, 'template.html'));
 let Html = '';
 readStream.on('data', chunk => Html += chunk);
-readStream.on('end', () => { return Html });
+readStream.on('end', () => {return Html});
 
 
 fs.readdir(path.join(__dirname, 'components'), (err, files) => {
@@ -31,8 +31,9 @@ fs.readdir(path.join(__dirname, 'components'), (err, files) => {
           htmlCount++;
           readHtml = fs.createReadStream(path.join(__dirname, 'components', files[i]));
           readHtml.on('data', chunk => {
-            Html = Html.replace(files[i].padStart(files[i].length + 2, '{{').padEnd(files[i].length + 4, '}}'), chunk);
             sum++;
+            Html = Html.replace(files[i].padStart(files[i].length + 2, '{{').padEnd(files[i].length + 4, '}}').slice(0, files[i].length-3)+'}}', chunk);
+            // console.log(files[i].padStart(files[i].length + 2, '{{').padEnd(files[i].length + 4).slice(0, files[i].length-3)+'}}');
             if (htmlCount === sum) {
               writeHTML = fs.createWriteStream(path.join(__dirname, 'project-dist', 'index.html'));
               writeHTML.write(Html);
