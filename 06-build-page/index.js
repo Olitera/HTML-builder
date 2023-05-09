@@ -15,9 +15,6 @@ let writeStyles
 fs.mkdir(path.join(__dirname, 'project-dist'), { recursive: true }, () => {
   writeStyles = fs.createWriteStream(path.join(__dirname, 'project-dist', 'styles.css'));
 });
-// writeStyles = fs.createWriteStream(path.join(__dirname, 'project-dist', 'styles.css'));
-
-
 
 readStream = fs.createReadStream(path.join(__dirname, 'template.html'));
 let Html = '';
@@ -68,31 +65,21 @@ fs.readdir(path.join(__dirname, 'styles'), (err, files) => {
   }
 });
 
-// fsPromises.mkdir(path.join(__dirname, 'project-dist', 'assets'), { recursive: true })
-//     .then(() => fsPromises.readdir(path.join(__dirname, 'assets')))
-//     .then((filesArray) => {
-//       console.log(filesArray);
-//       // for (const file of filesArray) {
-//       //   fsPromises.copyFile(`${path.join(__dirname, 'assets', file)}`, `${path.join(__dirname, 'project-dist', 'assets', file)}`);
-//       // }
-//     });
 let currentDir = path.join(__dirname, 'project-dist', 'assets');
 let assetsDir = path.join(__dirname, 'assets');
 
 function copy(dirName, assetsDir) {
-  fsPromises.mkdir(currentDir, { recursive: true })
+  fsPromises.mkdir(dirName, { recursive: true })
     .then(() => fsPromises.readdir(assetsDir))
     .then((filesArray) => {
-      console.log(filesArray);
+      // console.log(filesArray);
       for (const file of filesArray) {
         fs.stat(path.join(assetsDir, file), (err, stats) => {
           if (err) throw err;
           if (stats.isFile()) {
-
-            // fsPromises.copyFile(`${path.join(__dirname, 'assets', file)}`, `${path.join(__dirname, 'project-dist', 'assets', file)}`);
+            fsPromises.copyFile(`${assetsDir}/${file}`, `${dirName}/${file}`);
           } else {
-            console.log('hjhkjh')
-            copy(`${dirName}/${file}`)
+            copy(`${dirName}/${file}`, `${assetsDir}/${file}`)
           }
         })
       }
