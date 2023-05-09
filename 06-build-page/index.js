@@ -19,7 +19,7 @@ fs.mkdir(path.join(__dirname, 'project-dist'), { recursive: true }, () => {
 readStream = fs.createReadStream(path.join(__dirname, 'template.html'));
 let Html = '';
 readStream.on('data', chunk => Html += chunk);
-readStream.on('end', () => {return Html});
+readStream.on('end', () => {return Html;});
 
 
 fs.readdir(path.join(__dirname, 'components'), (err, files) => {
@@ -44,7 +44,7 @@ fs.readdir(path.join(__dirname, 'components'), (err, files) => {
       }
     });
   }
-})
+});
 
 fs.readdir(path.join(__dirname, 'styles'), (err, files) => {
   if (err) throw err;
@@ -77,9 +77,9 @@ function copy(dirName, assetsDir) {
           if (stats.isFile()) {
             fsPromises.copyFile(`${assetsDir}/${file}`, `${dirName}/${file}`);
           } else {
-            copy(`${dirName}/${file}`, `${assetsDir}/${file}`)
+            copy(`${dirName}/${file}`, `${assetsDir}/${file}`);
           }
-        })
+        });
       }
     });
 }
